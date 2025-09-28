@@ -1,0 +1,79 @@
+:root {
+  --primary: #0d6efd;
+  --bg: #f8f9fa;
+  --text: #212529;
+  --card: #ffffff;
+  --secondary: #6c757d;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  transition: background-color 0.4s, color 0.4s;
+}
+
+body.dark-mode {
+  --bg: #121212;
+  --text: #e9ecef;
+  --card: #1e1e1e;
+  --secondary: #adb5bd;
+}
+
+.navbar-brand {
+  font-weight: 700;
+  letter-spacing: 1px;
+  transition: transform 0.3s;
+}
+.navbar-brand:hover {
+  transform: scale(1.1);
+}
+
+.card, .jumbotron, .list-group-item, .table {
+  background-color: var(--card);
+  color: var(--text);
+  transition: background-color 0.4s, color 0.4s;
+}
+
+.btn {
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* Card hover effect */
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+}
+
+/* Topic buttons */
+.topic-btn {
+  display: inline-block;
+  padding: 12px 20px;
+  margin: 5px;
+  border-radius: 8px;
+  background: var(--primary);
+  color: #fff;
+  font-weight: 500;
+  transition: all 0.3s;
+  text-decoration: none;
+}
+.topic-btn:hover {
+  background: #0b5ed7;
+  transform: scale(1.05);
+}
+
+/* Footer links */
+footer a:hover {
+  text-decoration: underline;
+  color: var(--primary);
+}
+
+/* Form validation */
+.is-invalid {
+  border-color: #dc3545;
+  box-shadow: none;
+}
