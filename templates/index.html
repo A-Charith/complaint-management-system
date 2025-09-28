@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Home - CMS{% endblock %}
+{% block content %}
+<div class="jumbotron p-5 rounded bg-primary text-white text-center">
+  <h1 class="display-4 fw-bold">Complaint Management System</h1>
+  <p class="lead my-3">Register grievances to relevant departments and track them online with updates from administrators.</p>
+  <div class="mt-3">
+    {% if not session.get('user_id') %}
+      <a href="{{ url_for('register') }}" class="btn btn-outline-light btn-lg me-2">Register</a>
+      <a href="{{ url_for('login') }}" class="btn btn-light btn-lg">Login</a>
+    {% else %}
+      <a href="{{ url_for('complaint') }}" class="btn btn-outline-light btn-lg me-2">File a Complaint</a>
+      {% if session.get('role') == 'citizen' %}
+        <a href="{{ url_for('citizen_dashboard') }}" class="btn btn-light btn-lg">My Complaints</a>
+      {% else %}
+        <a href="{{ url_for('admin_dashboard') }}" class="btn btn-light btn-lg">Admin Dashboard</a>
+      {% endif %}
+    {% endif %}
+  </div>
+</div>
+
+<!-- Topics Section -->
+<h3 class="mt-5 mb-3 text-center">Browse by Topic</h3>
+<div class="text-center">
+  <a href="#" class="topic-btn">Corruption</a>
+  <a href="#" class="topic-btn">Electricity</a>
+  <a href="#" class="topic-btn">Water</a>
+  <a href="#" class="topic-btn">Transport</a>
+  <a href="#" class="topic-btn">Roads</a>
+  <a href="#" class="topic-btn">Police Grievance</a>
+</div>
+{% endblock %}
