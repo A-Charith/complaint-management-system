@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Register{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-7">
+    <h3>Citizen Registration</h3>
+    <form method="POST" action="{{ url_for('register') }}">
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label>Name</label>
+          <input class="form-control" name="name" required>
+        </div>
+        <div class="col-md-6 mb-3">
+          <label>Email</label>
+          <input class="form-control" type="email" name="email" required>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label>Password</label>
+        <input class="form-control" name="password" type="password" required>
+        <small class="form-text text-muted">Use a strong password.</small>
+      </div>
+      <div class="mb-3">
+        <label>Region</label>
+        <select name="region" class="form-select">
+          <option>North</option>
+          <option>South</option>
+          <option>East</option>
+          <option>West</option>
+          <option>Central</option>
+          <option>Head Office</option>
+        </select>
+      </div>
+      <button class="btn btn-success">Register</button>
+    </form>
+  </div>
+</div>
+{% endblock %}
