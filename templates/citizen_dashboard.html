@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}My Complaints{% endblock %}
+{% block content %}
+<h3>My Complaints</h3>
+{% if complaints %}
+  <div class="list-group">
+    {% for c in complaints %}
+      <div class="list-group-item">
+        <div class="d-flex w-100 justify-content-between">
+          <h5 class="mb-1">{{ c['department'] }} - <small>{{ c['region'] }}</small></h5>
+          <small>Status: <span class="badge bg-secondary">{{ c['status'] }}</span></small>
+        </div>
+        <p class="mb-1">{{ c['description'] }}</p>
+        <small>Submitted: {{ c['date_submitted'] }}</small>
+      </div>
+    {% endfor %}
+  </div>
+{% else %}
+  <p>No complaints submitted yet. <a href="{{ url_for('complaint') }}">File one now.</a></p>
+{% endif %}
+{% endblock %}
