@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% block title %}Admin Dashboard{% endblock %}
+{% block content %}
+<h3>Admin Dashboard</h3>
+
+<form class="row g-2 mb-3" method="get" action="{{ url_for('admin_dashboard') }}">
+  <div class="col-md-4">
+    <select name="department" class="form-select">
+      <option value="">All Departments</option>
+      {% for d in departments %}
+        <option value="{{ d }}" {% if request.args.get('department') == d %}selected{% endif %}>{{ d }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="col-md-4">
+    <select name="region" class="form-select">
+      <option value="">All Regions</option>
+      {% for r in regions %}
+        <option value="{{ r }}" {% if request.args.get('region') == r %}selected{% endif %}>{{ r }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="col-md-4">
+    <button class="btn btn-secondary">Filter</button>
+    <a href="{{ url_for('admin_dashboard') }}" class="btn btn-outline-secondary">Reset</a>
+  </div>
+</form>
+
+{% if complaints %}
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Department</th>
+        <th>Region</th>
+        <th>Submitter</th>
+        <th>Description</th>
+        <th>Status</th>
+        <th>Submitted</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for c in complaints %}
+      <tr>
+        <td>{{ c['id'] }}</td>
+        <td>{{ c['department'] }}</td>
+        <td>{{ c['region'] }}</td>
+        <td>{{ c['submitter_name'] }} <br> <small>{{ c['submitter_email'] }}</small></td>
+        <td style="max-width:300px">{{ c['description']|truncate(120) }}</td>
+        <td>{{ c['status'] }}</td>
+        <td>{{ c['date_submitted'] }}</td>
+        <td>
+          <form method="post" action="{{ url_for('update_status', cid=c['id']) }}">
+            <div class="input-group">
+              <select name="status" class="form-select form-select-sm">
+                <option {% if c['status']=='Pending' %}selected{% endif %}>Pending</option>
+                <option {% if c['status']=='In Progress' %}selected{% endif %}>In Progress</option>
+                <option {% if c['status']=='Resolved' %}selected{% endif %}>Resolved</option>
+                <option {% if c['status']=='Under Review' %}selected{% endif %}>Under Review</option>
+              </select>
+              <button class="btn btn-sm btn-primary" type="submit">Update</button>
+            </div>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% else %}
+  <p>No complaints found.</p>
+{% endif %}
+{% endblock %}
