@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Register Complaint{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-8">
+    <h3>Register Complaint</h3>
+    <form method="POST" action="{{ url_for('complaint') }}" id="complaintForm">
+      <div class="mb-3">
+        <label>Department</label>
+        <select name="department" class="form-select" id="department" required>
+          <option value="">Select department</option>
+          {% for d in departments %}
+            <option value="{{ d }}">{{ d }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="mb-3">
+        <label>Region</label>
+        <select name="region" class="form-select" id="region" required>
+          <option value="">Select region</option>
+          {% for r in regions %}
+            <option value="{{ r }}">{{ r }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="mb-3">
+        <label>Description</label>
+        <textarea name="description" class="form-control" rows="5" minlength="10" maxlength="2000" required></textarea>
+      </div>
+      <div id="errorMsg" class="text-danger mb-2" style="display:none;"></div>
+      <button class="btn btn-primary">Submit Complaint</button>
+    </form>
+  </div>
+</div>
+{% endblock %}
