@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Settings{% endblock %}
+{% block content %}
+<h3>Settings</h3>
+<form method="post">
+  <div class="mb-3">
+    <label>Name</label>
+    <input class="form-control" value="{{ user['name'] }}" disabled>
+  </div>
+  <div class="mb-3">
+    <label>Email</label>
+    <input class="form-control" value="{{ user['email'] }}" disabled>
+  </div>
+  <div class="mb-3">
+    <label>Region</label>
+    <select name="region" class="form-select">
+      {% for r in regions %}
+        <option value="{{ r }}" {% if user['region'] == r %}selected{% endif %}>{{ r }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <button class="btn btn-primary">Save Settings</button>
+</form>
+{% endblock %}
